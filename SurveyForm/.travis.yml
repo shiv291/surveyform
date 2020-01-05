@@ -1,0 +1,6 @@
+language: csharp
+solution: surveyform.sln
+donet:2.1.502
+script:
+ -dotnet restore
+...
