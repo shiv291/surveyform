@@ -2,14 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SurveyForm.BusinessLib;
+using SurveyForm.Models;
 
 namespace SurveyForm
 {
     public class Startup
     {
+        public static string connectionString= "Server=PCPC;Database=surveydb;Trusted_Connection=True;";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,7 +31,10 @@ namespace SurveyForm
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddScoped<ISurveyOperation, SurveyOperation>();
+            services.AddScoped<ISurveyOperation, SurveyOperation>();           
+            
+            services.AddDbContext<SurveyContext>(options =>
+              options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
