@@ -2,14 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SurveyForm.BusinessLib;
+using SurveyFormProject.BusinessLib;
+using SurveyFormProject.Models;
 
-namespace SurveyForm
+namespace SurveyFormProject
 {
     public class Startup
     {
+        public static string connectionString= "Server=PCPC;Database=surveydb;Trusted_Connection=True;";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,13 +25,17 @@ namespace SurveyForm
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddScoped<ISurveyOperation, SurveyOperation>();
+
+            services.AddDbContext<SurveyContext>(options =>
+              options.UseSqlServer(connectionString));
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddScoped<ISurveyOperation, SurveyOperation>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
