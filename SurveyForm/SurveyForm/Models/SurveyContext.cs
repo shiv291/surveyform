@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SurveyForm.Models
+namespace SurveyFormProject.Models
 {
     public class SurveyContext : DbContext
     {
@@ -14,8 +14,8 @@ namespace SurveyForm.Models
         public SurveyContext(DbContextOptions<SurveyContext> options)
             : base(options)
         {
-        }
-        //public virtual DbSet<ColumnType> ColumnType { get; set; }
+        }        
+        public virtual DbSet<SurveyForm> SurveyForm { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,7 +26,7 @@ namespace SurveyForm.Models
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {           
 
         }
         }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SurveyForm.Models;
+using SurveyFormProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SurveyForm
+namespace SurveyFormProject
 {
     public class GenericRepository<T>:IGenericRepository<T> where T:class
     {
